@@ -23,10 +23,10 @@ export class HueBridge {
         let group: any;
 
         if (!Number.isInteger(Number(groupId))) {
-            throw new Error("groupId must be int | string [0,16] inclusive.")
+            throw new Error("groupId must be int | string greater than 0.")
         }
-        else if (Number(groupId) < 0 || Number(groupId) > 16) {
-            throw new Error("groupId must be int | string [0,16] inclusive.")
+        else if (Number(groupId) < 0) {
+            throw new Error("groupId must be int | string greater than 0.")
         }
 
         group = await HueHttp.getGroup(this.opts.address, this.opts.username, groupId);
@@ -38,10 +38,10 @@ export class HueBridge {
     async start(groupId: string): Promise<void> {
 
         if (!Number.isInteger(Number(groupId))) {
-            throw new Error("GroupId must be in integer [0,31] inclusive as type string or empty string.");
+            throw new Error("GroupId must be in integer greater than 0 as type string or empty string.");
         }
-        else if (Number(groupId) < 0 || Number(groupId) > 31) {
-            throw new Error("GroupId must be in integer [0,31] inclusive as type string or empty string."); 
+        else if (Number(groupId) < 0) {
+            throw new Error("GroupId must be in integer greater than 0 as type string or empty string."); 
         }
 
         if (this.pheaEngine == null) {
@@ -85,10 +85,10 @@ export class HueBridge {
         lightId.forEach((id) => {
             
             if (!Number.isInteger(Number(id))) {
-                throw new Error("lightId | lightId[] must be int[0,31] inclusive as type string.")
+                throw new Error("lightId | lightId[] must be int greater than 0 as type string.")
             }
             else if (Number(id) < 0 || Number(id) > 16) {
-                throw new Error("lightId | lightId[] must be int[0,31] inclusive as type string."); 
+                throw new Error("lightId | lightId[] must be int greater than 0 as type string."); 
             }
 
             if (this.pheaEngine != null && this.pheaEngine.running) {
